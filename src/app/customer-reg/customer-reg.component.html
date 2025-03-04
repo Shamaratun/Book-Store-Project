@@ -1,0 +1,110 @@
+<!-- <div class="container">
+    <div *ngIf="selectedCustomer" class="modal" tabindex="-1" style="display:block">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update Customer</h5>
+          <button type="button" class="close" (click)="selectedCustomer = null">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="updateCustomer(selectedCustomer)">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input id="name" [(ngModel)]="selectedCustomer.name" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" [(ngModel)]="selectedCustomer.email" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input id="phone" [(ngModel)]="selectedCustomer.phone" name="phone" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input id="address" [(ngModel)]="selectedCustomer.address" name="address" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="form-container">
+  <h2>Register</h2>
+  <form id="registration-form">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter username" required>
+      <i class="fa fa-user"></i>
+      <div class="error-message" id="username-error"></div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter email" required>
+      <i class="fa fa-envelope"></i>
+      <div class="error-message" id="email-error"></div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter password" required>
+      <i class="fa fa-lock"></i>
+      <div class="error-message" id="password-error"></div>
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Register">
+    </div>
+    <div class="form-footer">
+      <p>Already have an account? <a href="#">Login</a></p>
+    </div>
+  </form>
+</div>
+<!-- <script>
+
+  document.getElementById('registration-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let isValid = true;
+    const username = document.getElementById('username');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+
+    // Username validation
+    if (username.value.trim() === '') {
+      document.getElementById('username-error').textContent = 'Username is required';
+      isValid = false;
+    } else {
+      document.getElementById('username-error').textContent = '';
+    }
+
+    // Email validation
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!emailPattern.test(email.value.trim())) {
+      document.getElementById('email-error').textContent = 'Please enter a valid email';
+      isValid = false;
+    } else {
+      document.getElementById('email-error').textContent = '';
+    }
+
+   
+    if (password.value.trim().length < 6) {
+      document.getElementById('password-error').textContent = 'Password must be at least 6 characters';
+      isValid = false;
+    } else {
+      document.getElementById('password-error').textContent = '';
+    }
+
+    if (isValid) {
+     
+      alert('Form submitted successfully!');
+     
+    } else {
+     
+      alert('Please fix the errors before submitting.');
+    }
+  });
+</script> -->
