@@ -10,20 +10,23 @@ import { NotFoundComponent } from './message/not-found/not-found.component';
 import { InvalidComponent } from './message/invalid/invalid.component';
 import { SuccessComponent } from './message/success/success.component';
 import { RegFormComponent } from './adminP/reg-form/reg-form.component';
+import { CustomerListComponent } from './customerList/customerList.component';
+import { CustomerCrudComponent } from './customerCRUD/customerCRUD.component';
 
 
 export const routes: Routes = [
   { path: 'header', component: HeaderComponent },  // You can set the default route to display the header
   { path: 'booklist', component: BookListComponent },  // Path for the BookList component
   { path: 'bookCRUD', component: BookCRUDComponent },  // Path for the BookCRUD component
-   { path: 'customer-reg', component: CustomerRegComponent },  // Path for the CustomerReg component
-   { path: 'admin', component: AdminComponent },
-   { path: 'success', component: SuccessComponent },
-   { path: 'invalid', component: InvalidComponent },
-   { path: 'not-found', component: NotFoundComponent },
-   { path: 'sorry', component: SorryComponent },  
+  { path: 'customer-reg', component: CustomerRegComponent },
+  {path: 'customerCRUD', component: CustomerCrudComponent},
+  { path: 'customerList', component: CustomerListComponent },
+  { path: 'success', component: SuccessComponent },
+  { path: 'invalid', component: InvalidComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: 'sorry', component: SorryComponent },
 
-    { path: 'reg-form', component: RegFormComponent },
+  { path: 'reg-form', component: RegFormComponent },
 
   //  { path: 'admin', component: AdminComponent },
 

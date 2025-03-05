@@ -9,16 +9,19 @@
           <th>Id</th>
           <th>Name</th>
           <th>Email</th>
+          <th>NID</th>
           <th>Phone</th>
           <th>Address</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let customer of customers">
+        <tr>
+        @for (customer of customers; track customers) {
           <td>{{ customer.id }}</td>
           <td>{{ customer.name }}</td>
           <td>{{ customer.email }}</td>
+          <td>{{ customer.nid }}</td>
           <td>{{ customer.phone }}</td>
           <td>{{ customer.address }}</td>
           <td>
@@ -33,6 +36,7 @@
             </button>
           </td>
         </tr>
+      }
       </tbody>
     </table>
   
