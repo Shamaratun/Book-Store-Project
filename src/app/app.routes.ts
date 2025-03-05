@@ -4,7 +4,12 @@ import { BookListComponent } from './book/booklist/booklist.component'; // Impor
 import { HeaderComponent } from './header/header.component'; // Import your Header component
 import { BookCRUDComponent } from './book/book-crud/book-crud.component';
 import { CustomerRegComponent } from './customer-reg/customer-reg.component';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent } from './adminP/adminHeader/admin.component';
+import { SorryComponent } from './message/sorry/sorry.component';
+import { NotFoundComponent } from './message/not-found/not-found.component';
+import { InvalidComponent } from './message/invalid/invalid.component';
+import { SuccessComponent } from './message/success/success.component';
+import { RegFormComponent } from './adminP/reg-form/reg-form.component';
 
 
 export const routes: Routes = [
@@ -13,6 +18,15 @@ export const routes: Routes = [
   { path: 'bookCRUD', component: BookCRUDComponent },  // Path for the BookCRUD component
    { path: 'customer-reg', component: CustomerRegComponent },  // Path for the CustomerReg component
    { path: 'admin', component: AdminComponent },
+   { path: 'success', component: SuccessComponent },
+   { path: 'invalid', component: InvalidComponent },
+   { path: 'not-found', component: NotFoundComponent },
+   { path: 'sorry', component: SorryComponent },  
+
+    { path: 'reg-form', component: RegFormComponent },
+
+  //  { path: 'admin', component: AdminComponent },
+
 ];
 
 
