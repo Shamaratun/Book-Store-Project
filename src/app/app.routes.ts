@@ -14,6 +14,7 @@ import { CustomerListComponent } from './Customer/customer-list/customer-list.co
 import { CustomerCrudComponent } from './customerCRUD/customerCRUD.component';
 import { BookCategoryComponent } from './book/book-category/book-category.component';
 import { DashboardComponent } from './header/dashboard/dashboard.component';
+import { IslamiBooklistComponent } from './book/islami-booklist/islami-booklist.component';
 
 
 export const routes: Routes = [
@@ -30,7 +31,7 @@ export const routes: Routes = [
   { path: 'book-category', component: BookCategoryComponent },
 
    { path: 'dashboard', component: DashboardComponent },
-  // { path: 'success', component: SuccessComponent },
+   { path: 'islami-booklist', component: IslamiBooklistComponent },
   // { path: 'invalid', component: InvalidComponent },
   // { path: 'not-found', component: NotFoundComponent },
   // { path: 'sorry', component: SorryComponent },
