@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { IslamiBooklistComponent } from "../islami-booklist/islami-booklist.component";
 
 @Component({
   selector: 'app-book-category',
-  imports: [],
+  imports: [IslamiBooklistComponent],
   templateUrl: './book-category.component.html',
   styleUrl: './book-category.component.css'
 })

@@ -12,6 +12,8 @@ import { SuccessComponent } from './message/success/success.component';
 import { RegFormComponent } from './adminP/reg-form/reg-form.component';
 import { CustomerListComponent } from './Customer/customer-list/customer-list.component';
 import { CustomerCrudComponent } from './customerCRUD/customerCRUD.component';
+import { BookCategoryComponent } from './book/book-category/book-category.component';
+import { DashboardComponent } from './header/dashboard/dashboard.component';
 
 
 export const routes: Routes = [
@@ -25,7 +27,14 @@ export const routes: Routes = [
   { path: 'invalid', component: InvalidComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'sorry', component: SorryComponent },
+  { path: 'book-category', component: BookCategoryComponent },
 
+   { path: 'dashboard', component: DashboardComponent },
+  // { path: 'success', component: SuccessComponent },
+  // { path: 'invalid', component: InvalidComponent },
+  // { path: 'not-found', component: NotFoundComponent },
+  // { path: 'sorry', component: SorryComponent },
+  // { path: 'book-category', component: BookCategoryComponent },
   { path: 'reg-form', component: RegFormComponent },
 
     { path: 'admin', component: AdminComponent },
