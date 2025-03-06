@@ -10,7 +10,7 @@ import { NotFoundComponent } from './message/not-found/not-found.component';
 import { InvalidComponent } from './message/invalid/invalid.component';
 import { SuccessComponent } from './message/success/success.component';
 import { RegFormComponent } from './adminP/reg-form/reg-form.component';
-import { CustomerListComponent } from './customerList/customerList.component';
+import { CustomerListComponent } from './Customer/customer-list/customer-list.component';
 import { CustomerCrudComponent } from './customerCRUD/customerCRUD.component';
 
 
@@ -20,7 +20,7 @@ export const routes: Routes = [
   { path: 'bookCRUD', component: BookCRUDComponent },  // Path for the BookCRUD component
   { path: 'customer-reg', component: CustomerRegComponent },
   {path: 'customerCRUD', component: CustomerCrudComponent},
-  { path: 'customerList', component: CustomerListComponent },
+  { path: 'customerListComponent', component: CustomerListComponent },
   { path: 'success', component: SuccessComponent },
   { path: 'invalid', component: InvalidComponent },
   { path: 'not-found', component: NotFoundComponent },
@@ -28,7 +28,7 @@ export const routes: Routes = [
 
   { path: 'reg-form', component: RegFormComponent },
 
-  //  { path: 'admin', component: AdminComponent },
+    { path: 'admin', component: AdminComponent },
 
 ];
 

@@ -1,4 +1,3 @@
-<!-- customer-list.component.html -->
 <div class="container">
     <h1>Customer List</h1>
     
@@ -18,7 +17,7 @@
       <tbody>
         <tr>
         @for (customer of customers; track customers) {
-          <td>{{ customer.id }}</td>
+          <td>{{ customers.indexOf(customer) + 1}}</td>
           <td>{{ customer.name }}</td>
           <td>{{ customer.email }}</td>
           <td>{{ customer.nid }}</td>
@@ -26,19 +25,17 @@
           <td>{{ customer.address }}</td>
           <td>
             <!-- Update Button -->
-            <button class="btn btn-warning" (click)="updateCustomer(customer)">
+            <button class="btn btn-warning" (click)="editCustomer(customer)">
               Update
             </button>
             
             <!-- Delete Button -->
-            <button class="btn btn-danger" (click)="deleteCustomer(customer.id)">
+            <button class="btn btn-danger" (click)="deleteCustomer(customer)">
               Delete
             </button>
           </td>
+        }
         </tr>
-      }
+      
       </tbody>
     </table>
-  
-    <!-- Update Customer Form (Optional, for editing) -->
-   
