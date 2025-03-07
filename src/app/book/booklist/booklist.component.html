@@ -25,11 +25,13 @@
       <td>{{ book.targetAudience }}</td>
       <td>
         <!-- Update and delete buttons for each book -->
-        <button class="btn btn-primary btn-update" (click)="editBook(book)">
+        <button  class="btn btn-primary btn-outline-warning"
+        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" (click)="editBook(book)">
           Update
         </button><br>
 
-        <button class="btn btn-danger btn-delete" (click)="deleteBook(book)">
+        <button class="btn btn-outline-danger btn-secondary"
+        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" (click)="deleteBook(book)">
           Delete
         </button>
       </td>

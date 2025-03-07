@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './reg-form.component.css'
 })
 export class RegFormComponent {
+admin: any;
+Register(admin: any): void {
+  if (confirm('Are you sure you want toregister as admin?')) {
 
+}
+alert(admin + " registered as admin");
+}
 }
