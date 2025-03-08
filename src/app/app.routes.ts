@@ -16,7 +16,8 @@ import { CatagoryCRUDListComponent } from './book/catagory-crud-list/catagory-cr
 import { DashboardComponent } from './header/dashboard/dashboard.component';
 import { IslamiBooklistComponent } from './book/islami-booklist/islami-booklist.component';
 import { CustomerHeaderComponent } from './Customer/customer-header/customer-header.component';
-
+import { WritersCRUDListComponent } from './book/writers-crud-list/writers-crud-list.component';
+import { BookItemsComponent } from './book/book-items/book-items.component';
 
 export const routes: Routes = [
   { path: 'header', component: HeaderComponent },  // You can set the default route to display the header
@@ -34,8 +35,8 @@ export const routes: Routes = [
    { path: 'dashboard', component: DashboardComponent },
    { path: 'islami-booklist', component: IslamiBooklistComponent },
    { path: 'customer-header', component: CustomerHeaderComponent },
-  // { path: 'success', component: SuccessComponent },
-  // { path: 'not-found', component: NotFoundComponent },
+  { path: 'writers-crud-list', component: WritersCRUDListComponent },
+   { path: 'book-items', component: BookItemsComponent },
   // { path: 'sorry', component: SorryComponent },
   // { path: 'book-category', component: BookCategoryComponent },
   { path: 'reg-form', component: RegFormComponent },
