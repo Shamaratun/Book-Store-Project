@@ -3,7 +3,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 
 @Component({
   selector: 'app-header',
-  imports: [DashboardComponent],
+  imports: [],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

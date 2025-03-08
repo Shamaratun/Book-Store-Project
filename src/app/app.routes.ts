@@ -12,7 +12,7 @@ import { SuccessComponent } from './message/success/success.component';
 import { RegFormComponent } from './adminP/reg-form/reg-form.component';
 import { CustomerListComponent } from './Customer/customer-list/customer-list.component';
 import { CustomerCrudComponent } from './customerCRUD/customerCRUD.component';
-import { BookCategoryComponent } from './book/book-category/book-category.component';
+import { CatagoryCRUDListComponent } from './book/catagory-crud-list/catagory-crud-list.component';
 import { DashboardComponent } from './header/dashboard/dashboard.component';
 import { IslamiBooklistComponent } from './book/islami-booklist/islami-booklist.component';
 import { CustomerHeaderComponent } from './Customer/customer-header/customer-header.component';
@@ -29,7 +29,7 @@ export const routes: Routes = [
   { path: 'invalid', component: InvalidComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'sorry', component: SorryComponent },
-  { path: 'book-category', component: BookCategoryComponent },
+  { path: 'category-crud-list', component: CatagoryCRUDListComponent },
 
    { path: 'dashboard', component: DashboardComponent },
    { path: 'islami-booklist', component: IslamiBooklistComponent },
