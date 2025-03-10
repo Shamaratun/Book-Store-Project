@@ -1,118 +1,103 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 
-class Writer {
-  constructor(
-    public id: number,
-    public writerName: string,
-    public bookName: string,
-    public price: number,
-    public imageUrl: string | null
-  ) { }
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+
+export interface Writer {
+  id: number;
+  writerName: string;
+  bookName: string;
+  price: number;
+  imageUrl: string;
 }
 
 @Component({
-  selector: 'app-writer-crud-list',
-  imports: [FormsModule, CommonModule],
+  selector: 'app-writers-crud-list',
+  imports: [FormsModule,CommonModule],
   templateUrl: './writers-crud-list.component.html',
   styleUrls: ['./writers-crud-list.component.css']
 })
 export class WritersCRUDListComponent implements OnInit {
-  Writers: Writer[] = [];
-  w: Writer = new Writer(0, '', '', 0, null);
-  isUpdate = false;
-  imageUrl: string | ArrayBuffer | null = null;
+  writers: Writer[] = []; // Array to store books data
+  writer: Writer = {id:0, writerName: '', bookName: '', price: 0, imageUrl: '' }; // Object for form data
+  isUpdate: boolean = false; // Flag to check if it’s update mode
+  currentIndex: number | null = null; // To store the index of the writer being edited
+  modalOpen: boolean = false; // Flag to control modal visibility
 
-  constructor(private router: Router) {
-    const nav = this.router.getCurrentNavigation();
-    if (nav?.extras?.state?.['writers']) {
-      this.w = nav.extras.state['writers'];
-      this.isUpdate = true;
-    }
-  }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    // Load writers from localStorage
-    const savedWriters = JSON.parse(localStorage.getItem('writer') || '[]');
-    if (savedWriters) {
-      this.Writers = savedWriters;
+    const writersFromStorage = localStorage.getItem('writers');
+    if (writersFromStorage) {
+      this.writers = JSON.parse(writersFromStorage) as Writer[];
     }
-  }
-
-  trackWriters(index: number, writer: Writer): number {
-    return writer.id;
+    console.log('Writers:', this.writers); // Check if writers are loaded
   }
 
   onSubmit(): void {
-    let writers: Writer[] = JSON.parse(localStorage.getItem('writer') || '[]');
-
-    if (this.isUpdate) {
-      writers = writers.map((writer) => (writer.id === this.w.id ? this.w : writer));
+    if (this.isUpdate && this.currentIndex !== null) {
+      this.writers[this.currentIndex] = { ...this.writer }; // Replace the writer at the given index
     } else {
-      // Ensure that the ID is unique by checking the existing writers
-      this.w.id = writers.length ? Math.max(...writers.map(writer => writer.id)) + 1 : 1;
-      writers.push(this.w);
+      this.writers.push(this.writer); // Add a new writer/book
     }
-
-    // Store the updated list in localStorage
-    localStorage.setItem('writer', JSON.stringify(writers));
-
-    // Reset form data
-    this.w = new Writer(0, '', '', 0, null);
-
-    // Reload writers from localStorage
-    this.Writers = writers;
+  
+    localStorage.setItem('writers', JSON.stringify(this.writers)); // Save updated list to localStorage
+    console.log('Updated Writers:', this.writers); // Debugging updated writers
+    this.resetForm(); // Reset form
+    this.closeModal(); // Close modal after submitting
+  }
+  
+  // Reset the form after submission
+  resetForm(): void {
+    this.writer = {id:0, writerName: '', bookName: '', price: 0, imageUrl: '' };
+    this.isUpdate = false; // Reset update flag
+    this.currentIndex = null; // Reset index
   }
 
-  DeleteWriter(writerToDelete: Writer): void {
-    if (confirm('Are you sure you want to delete this writer?')) {
-      // Remove the writer from the list
-      this.Writers = this.Writers.filter(writer => writer !== writerToDelete);
-
-      // Update localStorage with the new list of writers
-      localStorage.setItem('writer', JSON.stringify(this.Writers));
-
-      alert('Writer deleted successfully');
-    }
+  // Method to handle the update action for a writer/book
+  editWriter(writer: Writer, index: number): void {
+    this.writer = { ...writer }; // Copy the writer's data into the form
+    this.currentIndex = index; // Store the index for updating
+    this.isUpdate = true; // Set the flag to indicate update mode
+    this.openModal(); // Open modal for editing
   }
 
-  onImageChange(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      // Check if file is an image type
-      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-      if (allowedTypes.includes(file.type)) {
-        this.w.imageUrl = URL.createObjectURL(file);
-        const reader = new FileReader();
-        reader.onload = () => {
-          this.imageUrl = reader.result;
-        };
-        reader.readAsDataURL(file);
-      } else {
-        alert('Only image files are allowed!');
-      }
+  // Method to handle deleting a writer/book from the list
+  deleteWriter(writerToDelete: Writer): void {
+    if (confirm('Are you sure you want to delete this book?')) {
+      this.writers = this.writers.filter(writer => writer !== writerToDelete); // Remove the writer
+      localStorage.setItem('writers', JSON.stringify(this.writers)); // Save the updated list
+      alert('Book deleted successfully'); // Notify the user
+  
     }
   }
 
-  AddToCart(writer: Writer): void {
-    let cart: Writer[] = JSON.parse(localStorage.getItem('cart') || '[]');
-
-    // Check if the writer's book is already in the cart
-    const existingItem = cart.find(item => item.id === writer.id);
-    if (existingItem) {
-      alert('This book is already in your cart.');
-      return;
-    }
-
-    cart.push(writer);
-    localStorage.setItem('cart', JSON.stringify(cart));
-
-    alert(`${writer.bookName} has been added to the cart.`);
+  // Method to display book details (this can be expanded as needed)
+  detailsOfBook(writer: Writer): void {
+    console.log('Book Details:', writer);
+    // You can add routing logic or additional functionality here
   }
 
-  DetailsOfBook(writer: Writer): void {
-    this.router.navigate(['/book-details'], { state: { writer } });
+  // Method to add book to the cart (you can expand functionality as needed)
+  addToCart(writer: Writer): void {
+    console.log('Adding to cart:', writer);
+    // Add to cart functionality can be added here
+  }
+
+  // Track by function for *ngFor (helps with better performance)
+  trackWriter(index: number, writer: Writer): number {
+    return writer.id; // Using writer's name as a unique identifier
+  }
+
+  // Method to open the modal
+  openModal(): void {
+    this.modalOpen = true; // Show modal
+  }
+
+  // Method to close the modal
+  closeModal(): void {
+    this.modalOpen = false; // Hide modal
   }
 }

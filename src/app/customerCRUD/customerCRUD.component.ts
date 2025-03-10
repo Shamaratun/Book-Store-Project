@@ -1,49 +1,77 @@
-import { NgClass } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-interface Customer {
-  id: number;
-  name: string;
-  email: string;
-  nid: number;
-  phone: string;
-  address: string;
+class Customer {
+  constructor(
+    public id: number,
+    public name: string,
+    public email: string,
+    public nid: string,
+    public phone: string,
+    public address: string
+  ) { }
 }
 
 @Component({
   selector: 'app-customer-crud',
-  imports:[FormsModule],
+  
+  imports: [FormsModule, CommonModule],
   templateUrl: './customerCRUD.component.html',
   styleUrls: ['./customerCRUD.component.css']
 })
-export class CustomerCrudComponent implements OnInit {
-  customer: Customer = { id: 0, name: '', email: '', nid: 0, phone: '', address: '' };
-  isUpdate: boolean = false;
+export class CustomerCRUDComponent implements OnInit {
+  customers: Customer[] = [];
+  customer: Customer = new Customer(0, '', '', '', '', '');
+  isUpdate = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    const nav = this.router.getCurrentNavigation();
+    if (nav?.extras?.state?.['customer']) {
+      this.customer = nav.extras.state['customer'];
+      this.isUpdate = true;
+    }
+  }
 
   ngOnInit(): void {
-    // If there is a customer object passed in the state, we populate it for updating
-    const navigationState = this.router.getCurrentNavigation()?.extras.state;
-    if (navigationState && navigationState['customer']) {
-      this.customer = navigationState['customer'];
-      this.isUpdate = true; // Set flag to true if we're editing an existing customer
-    }
+    this.loadCustomers();
+  }
+
+  loadCustomers(): void {
+    const savedCustomers = JSON.parse(localStorage.getItem('customers') || '[]');
+    this.customers = savedCustomers;
+  }
+
+  trackCustomers(index: number, customer: Customer): number {
+    return customer.id;
   }
 
   onSubmit(): void {
-    // Here you can either add a new customer or update an existing one
+    let customers: Customer[] = JSON.parse(localStorage.getItem('customers') || '[]');
+
     if (this.isUpdate) {
-      // Update logic
-      alert('Customer updated successfully');
+      customers = customers.map(cust => cust.id === this.customer.id ? this.customer : cust);
+      this.isUpdate = false;
     } else {
-      // Add new customer logic
-      alert('Customer added successfully');
+      this.customer.id = customers.length ? Math.max(...customers.map(cust => cust.id)) + 1 : 1;
+      customers.push(this.customer);
     }
 
-    // You may want to save the customer to localStorage or an API at this point
-    // Example: localStorage.setItem('customers', JSON.stringify([...customersList, this.customer]));
+    localStorage.setItem('customers', JSON.stringify(customers));
+    this.resetForm();
+    this.loadCustomers();
   }
-}
+
+  resetForm(): void {
+    this.customer = new Customer(0, '', '', '', '', '');
+    this.isUpdate = false;
+  }
+
+  deleteCustomer(customerToDelete: Customer): void {
+    if (confirm('Are you sure you want to delete this customer?')) {
+      this.customers = this.customers.filter(customer => customer.id !== customerToDelete.id);
+      localStorage.setItem('customers', JSON.stringify(this.customers));
+      alert('Customer deleted successfully');
+    }
+  }}

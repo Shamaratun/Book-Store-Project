@@ -34,6 +34,7 @@ export class CatagoryCRUDListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   
     // Load books from localStorage
     const savedBooks = localStorage.getItem('book');
     if (savedBooks) {

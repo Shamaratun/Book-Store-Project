@@ -5,10 +5,11 @@ import { HeaderComponent } from "./header/header.component";
 
 import { FormsModule } from '@angular/forms';
 import { CatagoryCRUDListComponent } from "./book/catagory-crud-list/catagory-crud-list.component";
+import { CardViewComponent } from "./book/card-view/card-view.component";
 //  import { NgModule } from '@angular/core';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FooterComponent, HeaderComponent, FormsModule, CatagoryCRUDListComponent],
+  imports: [RouterOutlet, FooterComponent, HeaderComponent, FormsModule, CatagoryCRUDListComponent, CardViewComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
