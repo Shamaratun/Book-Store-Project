@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { CustomerHeaderComponent } from "../Customer/customer-header/customer-header.component";
 
 // Define the Customer model
 export class Customer {
@@ -17,7 +18,7 @@ export class Customer {
 
 @Component({
   selector: 'app-customer-reg',
-  imports: [RouterModule, FormsModule, CommonModule],
+  imports: [RouterModule, FormsModule, CommonModule, CustomerHeaderComponent],
   templateUrl: './customer-reg.component.html',
   styleUrls: ['./customer-reg.component.css'],
 })
