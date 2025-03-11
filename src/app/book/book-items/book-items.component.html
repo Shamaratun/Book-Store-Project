@@ -1,18 +1,12 @@
 <h1 class="form-title">Books By Writers Name</h1>
 <div class="container">
   <form (ngSubmit)="onSubmit()" #bookForm="ngForm">
-    
+
     <!-- Writer's Name -->
     <div class="form-group">
       <label for="writerName">Writer's Name:</label>
-      <input
-        type="text"
-        name="writerName"
-        id="writerName"
-        [(ngModel)]="writer.writerName"
-        #writerName="ngModel"
-        required
-      />
+      <input type="text" name="writerName" id="writerName" [(ngModel)]="writer.writerName" #writerName="ngModel"
+        required />
       <div *ngIf="writerName.errors?.['required'] && writerName.touched">
         Writer's Name is required.
       </div>
@@ -21,14 +15,7 @@
     <!-- Book Name -->
     <div class="form-group">
       <label for="bookName">Book Name:</label>
-      <input
-        type="text"
-        name="bookName"
-        id="bookName"
-        [(ngModel)]="writer.bookName"
-        #bookName="ngModel"
-        required
-      />
+      <input type="text" name="bookName" id="bookName" [(ngModel)]="writer.bookName" #bookName="ngModel" required />
       <div *ngIf="bookName.errors?.['required'] && bookName.touched">
         Book Name is required.
       </div>
@@ -37,15 +24,7 @@
     <!-- Price -->
     <div class="form-group">
       <label for="price">Price:</label>
-      <input
-        type="number"
-        name="price"
-        id="price"
-        [(ngModel)]="writer.price"
-        #price="ngModel"
-        required
-        min="1"
-      />
+      <input type="number" name="price" id="price" [(ngModel)]="writer.price" #price="ngModel" required min="1" />
       <div *ngIf="price.errors?.['required'] && price.touched">
         Price is required.
       </div>
@@ -57,15 +36,8 @@
     <!-- Book Image -->
     <div class="form-group">
       <label for="imageUrl">Book Image URL:</label>
-      <input
-        type="text"
-        name="imageUrl"
-        id="imageUrl"
-        [(ngModel)]="writer.imageUrl"
-        #imageUrl="ngModel"
-        placeholder="Enter image URL"
-        required
-      />
+      <input type="text" name="imageUrl" id="imageUrl" [(ngModel)]="writer.imageUrl" #imageUrl="ngModel"
+        placeholder="Enter image URL" required />
       <div *ngIf="imageUrl.errors?.['required'] && imageUrl.touched" class="error-message">
         Image URL is required.
       </div>
@@ -95,30 +67,30 @@
       </tr>
     </thead>
     <tbody>
-      
-        @for(writer of writers;track writers){
-          <tr >
-          <td>{{ writers.indexOf(writer) + 1}}</td>
-        <td >{{ writer.writerName }}</td>
+
+
+      <tr *ngFor="let writer of writers;let i = index; track: writer">
+        <td>{{ writers.indexOf(writer) + 1}}</td>
+        <td>{{ writer.writerName }}</td>
         <td>{{ writer.bookName }}</td>
         <td>{{ writer.price }}</td>
         <td>
-          <img *ngIf="writer.imageUrl" [src]="writer.imageUrl" alt="Book Image" width="50" height="50"/>
+          <img *ngIf="writer.imageUrl" [src]="writer.imageUrl" alt="Book Image" width="50" height="50" />
         </td>
         <td>
           <button class="btn btn-primary btn-outline-warning"
-          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"(click)="editWriter(writer)">edit</button> <br>
-        
+            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+            (click)="editWriter(writer, i)">edit</button> <br>
+
           <button class="btn btn-outline-danger btn-secondary"
-          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"(click)="deleteWriter(writer)">delete</button>
+            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+            (click)="deleteWriter(i)">delete</button>
         </td>
-      
+
       </tr>
-        }
+
     </tbody>
   </table>
-  
- 
-  </div>
 
 
+</div>

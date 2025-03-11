@@ -57,7 +57,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let writer of writers;let i = index; trackBy: trackWriter">
+          <tr *ngFor="let writer of writers;let i = index">
             <td>{{ i+1}}</td>
             <td>{{ writer.writerName }}</td>
             <td>{{ writer.bookName }}</td>

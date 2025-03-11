@@ -9,7 +9,7 @@ import { CardViewComponent } from "./book/card-view/card-view.component";
 //  import { NgModule } from '@angular/core';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FooterComponent, HeaderComponent, FormsModule, CatagoryCRUDListComponent, CardViewComponent],
+  imports: [RouterOutlet, FooterComponent, HeaderComponent, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -38,4 +38,7 @@ export class AppComponent {
       this.price = price;
       this.targetAudience = targetAudience;
   
-    }}
+    }
+  }
+
+ 

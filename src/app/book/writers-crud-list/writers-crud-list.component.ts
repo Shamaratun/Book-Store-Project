@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 
 
 export interface Writer {
@@ -15,16 +15,17 @@ export interface Writer {
 
 @Component({
   selector: 'app-writers-crud-list',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule, NgFor],
   templateUrl: './writers-crud-list.component.html',
   styleUrls: ['./writers-crud-list.component.css']
 })
-export class WritersCRUDListComponent implements OnInit {
+export class WritersCrudListComponent implements OnInit {
   writers: Writer[] = []; // Array to store books data
   writer: Writer = {id:0, writerName: '', bookName: '', price: 0, imageUrl: '' }; // Object for form data
   isUpdate: boolean = false; // Flag to check if it’s update mode
   currentIndex: number | null = null; // To store the index of the writer being edited
   modalOpen: boolean = false; // Flag to control modal visibility
+  carts: Writer[] = [];
 
   constructor(private router: Router) { }
 
@@ -34,6 +35,9 @@ export class WritersCRUDListComponent implements OnInit {
       this.writers = JSON.parse(writersFromStorage) as Writer[];
     }
     console.log('Writers:', this.writers); // Check if writers are loaded
+
+    let allCarts = JSON.parse(localStorage.getItem('customers') || '[]');
+    this.carts =allCarts;
   }
 
   onSubmit(): void {
@@ -87,7 +91,9 @@ export class WritersCRUDListComponent implements OnInit {
 
   // Method to add book to the cart (you can expand functionality as needed)
   addToCart(writer: Writer): void {
-    console.log('Adding to cart:', writer);
+
+    this.carts.push(writer);
+    localStorage.setItem('cart', JSON.stringify(this.carts));
     // Add to cart functionality can be added here
   }
 

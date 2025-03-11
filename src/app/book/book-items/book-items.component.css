@@ -1,143 +1,50 @@
-/* General Styles */
-/* Form Container */
 .container {
   max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: auto;
 }
 
-/* Title */
-.form-title {
-  text-align: center;
-  color: #4e73df;
-  font-size: 2.5em;
-  font-family: 'Arial', sans-serif;
-  margin-bottom: 30px;
-}
-
-/* Form Group */
 .form-group {
-  margin-bottom: 20px;
-}
-
-/* Labels */
-.form-group label {
-  font-size: 1.1em;
-  color: #495057;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 8px;
-}
-
-/* Input Fields */
-input[type="text"],
-input[type="number"] {
-  width: 100%;
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid #ced4da;
-  font-size: 1em;
-  font-family: 'Arial', sans-serif;
-  box-sizing: border-box;
-  transition: all 0.3s ease;
-}
-
-/* Input Focus */
-input[type="text"]:focus,
-input[type="number"]:focus {
-  border-color: #4e73df;
-  outline: none;
-  box-shadow: 0 0 8px rgba(78, 115, 223, 0.3);
-}
-
-/* Error Messages */
-.error-message {
-  color: #e74a3b;
-  font-size: 0.9em;
-  margin-top: 5px;
-}
-
-
-
-button:focus {
-  outline: none;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .container {
-    padding: 15px;
-  }
-  .form-title {
-    font-size: 2em;
-  }
-  button {
-    width: 100%;
-  }
-}
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 20px;
-}
-
-/* Book List Container */
-.book-list-container {
-  display: block; /* Stack the books vertically */
-  margin-top: 20px;
-}
-
-/* Book Item */
-.book-item {
-  background-color: #fff;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  display: flex; /* Align image and text side by side */
-  align-items: center;
-}
-
-/* Image Styling for Books */
-.book-item img {
-  width: 100px;
-  height: 150px;
-  margin-right: 15px; /* Space between image and text */
-  border-radius: 5px;
-}
-
-/* Book Info */
-.book-info {
-  flex-grow: 1; /* Allow text to fill remaining space */
-}
-
-/* Action Buttons */
-.book-actions {
   display: flex;
-  gap: 10px;
-  margin-left: auto; /* Align buttons to the right */
+  flex-direction: column;
+  margin-bottom: 15px;
 }
 
-.book-actions button {
-  padding: 6px 12px;
-  font-size: 14px;
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+
+.form-action {
+  text-align: center;
+}
+
+button {
+  padding: 10px 15px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.book-actions button:hover {
-  background-color: #007bff;
-  color: white;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-/* No Books Message */
-.no-books-message {
+th, td {
+  padding: 10px;
   text-align: center;
-  color: #dc3545;
-  font-weight: bold;
-  margin-top: 20px;
+  border-bottom: 1px solid #ddd;
 }
