@@ -19,7 +19,7 @@ class Book {
   templateUrl: './catagory-crud-list.component.html',
   styleUrls: ['./catagory-crud-list.component.css']
 })
-export class CatagoryCRUDListComponent implements OnInit {
+export class CatagoryCrudListComponent implements OnInit {
   book: Book = new Book(0, '', '', 0, null);
   isUpdate = false;
   imageUrl: string | ArrayBuffer | null = null;

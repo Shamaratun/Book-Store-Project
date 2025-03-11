@@ -4,7 +4,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { HeaderComponent } from "./header/header.component";
 
 import { FormsModule } from '@angular/forms';
-import { CatagoryCRUDListComponent } from "./book/catagory-crud-list/catagory-crud-list.component";
+import { CatagoryCrudListComponent } from "./book/catagory-crud-list/catagory-crud-list.component";
 import { CardViewComponent } from "./book/card-view/card-view.component";
 //  import { NgModule } from '@angular/core';
 @Component({
