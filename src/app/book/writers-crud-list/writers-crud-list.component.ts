@@ -57,22 +57,27 @@ export class WritersCRUDListComponent implements OnInit {
   }
 
   // Method to handle the update action for a writer/book
-  editWriter(writer: Writer, index: number): void {
-    this.writer = { ...writer }; // Copy the writer's data into the form
-    this.currentIndex = index; // Store the index for updating
-    this.isUpdate = true; // Set the flag to indicate update mode
-    this.openModal(); // Open modal for editing
+  editWriter(writer: Writer): void {
+    this.router.navigate(['/writers-crud-list'], { state: { writer } });
   }
+   // Open modal for editing
+  
 
   // Method to handle deleting a writer/book from the list
   deleteWriter(writerToDelete: Writer): void {
     if (confirm('Are you sure you want to delete this book?')) {
-      this.writers = this.writers.filter(writer => writer !== writerToDelete); // Remove the writer
-      localStorage.setItem('writers', JSON.stringify(this.writers)); // Save the updated list
-      alert('Book deleted successfully'); // Notify the user
+      // Remove the writer from the array based on ID (or some other unique property)
+      this.writers = this.writers.filter(writer => writer.id !== writerToDelete.id);
   
+      // Update the writers list in localStorage
+      localStorage.setItem('writers', JSON.stringify(this.writers));
+  
+      // Notify the user
+      alert('Book deleted successfully');
+      console.log('Updated Writers after deletion:', this.writers); // Debugging
     }
   }
+  
 
   // Method to display book details (this can be expanded as needed)
   detailsOfBook(writer: Writer): void {

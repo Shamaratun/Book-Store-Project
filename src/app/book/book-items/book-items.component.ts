@@ -47,7 +47,7 @@ export class BookItemsComponent implements OnInit {
       this.writers = JSON.parse(savedWriters);
     }
   }
-
+  
   onSubmit() {
     let writers: Writer[] = JSON.parse(localStorage.getItem('writer') || '[]');
 

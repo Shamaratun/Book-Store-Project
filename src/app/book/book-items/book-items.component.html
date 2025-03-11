@@ -95,8 +95,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr >
+      
         @for(writer of writers;track writers){
+          <tr >
           <td>{{ writers.indexOf(writer) + 1}}</td>
         <td >{{ writer.writerName }}</td>
         <td>{{ writer.bookName }}</td>
@@ -105,14 +106,15 @@
           <img *ngIf="writer.imageUrl" [src]="writer.imageUrl" alt="Book Image" width="50" height="50"/>
         </td>
         <td>
-          <button class="btn btn-outline-danger btn-secondary"
-          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"(click)="editWriter(writer)">edit</button> <br>
           <button class="btn btn-primary btn-outline-warning"
+          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"(click)="editWriter(writer)">edit</button> <br>
+        
+          <button class="btn btn-outline-danger btn-secondary"
           style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"(click)="deleteWriter(writer)">delete</button>
         </td>
-      }
+      
       </tr>
-    
+        }
     </tbody>
   </table>
   
