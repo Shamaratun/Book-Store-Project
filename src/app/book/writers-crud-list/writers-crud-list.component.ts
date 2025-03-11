@@ -3,25 +3,27 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
+import { CartComponent } from "../../cart/cart.component";
 
 
 export interface Writer {
   id: number;
   writerName: string;
   bookName: string;
+  quantity: number;
   price: number;
   imageUrl: string;
 }
 
 @Component({
   selector: 'app-writers-crud-list',
-  imports: [FormsModule,CommonModule, NgFor],
+  imports: [FormsModule, CommonModule, NgFor, CartComponent],
   templateUrl: './writers-crud-list.component.html',
   styleUrls: ['./writers-crud-list.component.css']
 })
 export class WritersCrudListComponent implements OnInit {
   writers: Writer[] = []; // Array to store books data
-  writer: Writer = {id:0, writerName: '', bookName: '', price: 0, imageUrl: '' }; // Object for form data
+  writer: Writer = {id:0, writerName: '', bookName: '',quantity:0, price: 0, imageUrl: '' }; // Object for form data
   isUpdate: boolean = false; // Flag to check if it’s update mode
   currentIndex: number | null = null; // To store the index of the writer being edited
   modalOpen: boolean = false; // Flag to control modal visibility
@@ -55,29 +57,28 @@ export class WritersCrudListComponent implements OnInit {
   
   // Reset the form after submission
   resetForm(): void {
-    this.writer = {id:0, writerName: '', bookName: '', price: 0, imageUrl: '' };
+    this.writer = {id:0, writerName: '', bookName: '',quantity:1, price: 0, imageUrl: '' };
     this.isUpdate = false; // Reset update flag
     this.currentIndex = null; // Reset index
   }
 
   // Method to handle the update action for a writer/book
-  editWriter(writer: Writer): void {
-    this.router.navigate(['/writers-crud-list'], { state: { writer } });
-  }
-   // Open modal for editing
   
+  
+
+   editWriter(writer: Writer, index: number): void {
+    this.writer = { ...writer }; // Copy the writer's data into the form
+    this.currentIndex = index; // Store the index for updating
+    this.isUpdate = true; // Set the flag to indicate update mode
+    this.openModal(); // Open modal for editing
+  }
 
   // Method to handle deleting a writer/book from the list
   deleteWriter(writerToDelete: Writer): void {
     if (confirm('Are you sure you want to delete this book?')) {
-      // Remove the writer from the array based on ID (or some other unique property)
-      this.writers = this.writers.filter(writer => writer.id !== writerToDelete.id);
-  
-      // Update the writers list in localStorage
-      localStorage.setItem('writers', JSON.stringify(this.writers));
-  
-      // Notify the user
-      alert('Book deleted successfully');
+      this.writers = this.writers.filter(writer => writer !== writerToDelete); // Remove the writer
+      localStorage.setItem('writers', JSON.stringify(this.writers)); // Save the updated list
+      alert('Book deleted successfully'); 
       console.log('Updated Writers after deletion:', this.writers); // Debugging
     }
   }

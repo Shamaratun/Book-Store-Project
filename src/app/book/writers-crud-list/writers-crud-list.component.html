@@ -66,7 +66,7 @@
               <img *ngIf="writer.imageUrl" [src]="writer.imageUrl" alt="Book Image" width="50" height="50" />
             </td>
             <td>
-              <button class="btn btn-outline-info" (click)="editWriter(writer)">Edit</button>
+              <button class="btn btn-outline-info" (click)="editWriter(writer,i)">Edit</button>
               <button class="btn btn-outline-danger" (click)="deleteWriter(writer)">Delete</button>
             
               <button class="btn btn-outline-tertiary" (click)="detailsOfBook(writer)">Details</button>
@@ -83,3 +83,4 @@
     </div>
   </div>
 </div>
+<app-cart></app-cart>
