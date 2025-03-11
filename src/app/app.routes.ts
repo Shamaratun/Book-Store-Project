@@ -5,12 +5,7 @@ import { HeaderComponent } from './header/header.component'; // Import your Head
 import { BookCRUDComponent } from './book/book-crud/book-crud.component';
 import { CustomerRegComponent } from './customer-reg/customer-reg.component';
 import { AdminComponent } from './adminP/adminHeader/admin.component';
-import { SorryComponent } from './message/sorry/sorry.component';
-import { NotFoundComponent } from './message/not-found/not-found.component';
-import { InvalidComponent } from './message/invalid/invalid.component';
-import { SuccessComponent } from './message/success/success.component';
 import { RegFormComponent } from './adminP/reg-form/reg-form.component';
-// import { CustomerListComponent } from './Customer/customer-list/customer-list.component';
 import { CustomerCRUDComponent } from './customerCRUD/customerCRUD.component';
 import { CatagoryCRUDListComponent } from './book/catagory-crud-list/catagory-crud-list.component';
 import { DashboardComponent } from './header/dashboard/dashboard.component';
@@ -19,6 +14,9 @@ import { CustomerHeaderComponent } from './Customer/customer-header/customer-hea
 import { WritersCRUDListComponent } from './book/writers-crud-list/writers-crud-list.component';
 import { BookItemsComponent } from './book/book-items/book-items.component';
 import { CatagoryComponent } from './book/catagory/catagory.component';
+import { CardViewComponent } from './book/card-view/card-view.component';
+import { SListComponent } from './slist/slist.component';
+import { CustomerListComponent } from './Customer/customer-list/customer-list.component';
 
 export const routes: Routes = [
   { path: 'header', component: HeaderComponent },  // You can set the default route to display the header
@@ -26,6 +24,7 @@ export const routes: Routes = [
   { path: 'bookCRUD', component: BookCRUDComponent },  // Path for the BookCRUD component
   { path: 'customer-reg', component: CustomerRegComponent },
   {path: 'customerCRUD', component: CustomerCRUDComponent},
+  {path: 'customer-list',component: CustomerListComponent},
    { path: 'category-crud-list', component: CatagoryCRUDListComponent },
    { path: 'dashboard', component: DashboardComponent },
    { path: 'islami-booklist', component: IslamiBooklistComponent },
@@ -33,11 +32,10 @@ export const routes: Routes = [
   { path: 'writers-crud-list', component: WritersCRUDListComponent },
    { path: 'book-items', component: BookItemsComponent },
   { path: 'catagory', component: CatagoryComponent },
-  // { path: 'book-category', component: BookCategoryComponent },
+   { path: 'card-view', component: CardViewComponent },
   { path: 'reg-form', component: RegFormComponent },
-
     { path: 'admin', component: AdminComponent },
-
+{path: 's-list', component: SListComponent},
 ];
 
 

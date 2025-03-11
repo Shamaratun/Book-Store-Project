@@ -8,7 +8,8 @@ class Customer {
     public id: number,
     public name: string,
     public email: string,
-    public nid: string,
+    public password: string,
+    public nid: number,
     public phone: string,
     public address: string
   ) { }
@@ -23,7 +24,7 @@ class Customer {
 })
 export class CustomerCRUDComponent implements OnInit {
   customers: Customer[] = [];
-  customer: Customer = new Customer(0, '', '', '', '', '');
+  customer: Customer = new Customer(0,'', '', '', 0,'', '');
   isUpdate = false;
 
   constructor(private router: Router) {
@@ -64,13 +65,13 @@ export class CustomerCRUDComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.customer = new Customer(0, '', '', '', '', '');
+    this.customer = new Customer(0, '', '', '',0, '', '');
     this.isUpdate = false;
   }
 
   deleteCustomer(customerToDelete: Customer): void {
     if (confirm('Are you sure you want to delete this customer?')) {
-      this.customers = this.customers.filter(customer => customer.id !== customerToDelete.id);
+      this.customers = this.customers.filter(customer => customer !== customerToDelete);
       localStorage.setItem('customers', JSON.stringify(this.customers));
       alert('Customer deleted successfully');
     }

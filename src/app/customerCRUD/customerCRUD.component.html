@@ -26,6 +26,18 @@
     </div>
     <br />
     <div>
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        placeholder="Enter password"
+        name="password"
+        id="password"
+        [(ngModel)]="customer.password"
+        required
+      />
+    </div>
+    <br />
+    <div>
       <label for="nid">NID:</label>
       <input
         type="text"

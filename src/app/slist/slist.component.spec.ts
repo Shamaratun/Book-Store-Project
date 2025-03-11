@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SuccessComponent } from './success.component';
+import { SListComponent } from './slist.component';
 
-describe('SuccessComponent', () => {
-  let component: SuccessComponent;
-  let fixture: ComponentFixture<SuccessComponent>;
+describe('SListComponent', () => {
+  let component: SListComponent;
+  let fixture: ComponentFixture<SListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SuccessComponent]
+      imports: [SListComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SuccessComponent);
+    fixture = TestBed.createComponent(SListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

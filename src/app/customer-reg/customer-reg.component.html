@@ -1,79 +1,61 @@
-<!-- <div class="container">
-    <div *ngIf="selectedCustomer" class="modal" tabindex="-1" style="display:block">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Update Customer</h5>
-          <button type="button" class="close" (click)="selectedCustomer = null">
-            <span>&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form (ngSubmit)="updateCustomer(selectedCustomer)">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input id="name" [(ngModel)]="selectedCustomer.name" name="name" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input id="email" [(ngModel)]="selectedCustomer.email" name="email" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <input id="phone" [(ngModel)]="selectedCustomer.phone" name="phone" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="address">Address</label>
-              <input id="address" [(ngModel)]="selectedCustomer.address" name="address" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-          </form>
-        </div>
-      </div>
-    </div>
+<h1 class="form-title">Register Customer</h1>
+<form id="registration-form" class="customer-form">
+  <div class="form-group">
+    <label for="customername" class="form-label">Customer's Name:</label>
+    <input type="text" id="customername" name="customername" placeholder="Enter customer's name" [(ngModel)]="customer.customername" required class="form-input">
+    <i class="fa fa-user"></i>
+    <div class="error-message" id="customername-error"></div>
   </div>
-</div> -->
 
-<div class="form-container">
-  <h2>Register customer</h2>
-  <form id="registration-form">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" placeholder="Enter username" required>
-      <i class="fa fa-user"></i>
-      <div class="error-message" id="username-error"></div>
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Enter email" required>
-      <i class="fa fa-envelope"></i>
-      <div class="error-message" id="email-error"></div>
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="Enter password" required>
-      <i class="fa fa-lock"></i>
-      <div class="error-message" id="password-error"></div>
-    </div>
-    <div class="form-group">
-      <input type="button button-tertiary" value="Register" (click)="Register(customer)" href="http://localhost:6010/success">
-    </div>
-    <div class="form-footer">
-    <a href="http://localhost:6010/customer-header">Login</a>
-    </div>
-  </form>
-</div>
-<!-- <script>
+  <div class="form-group">
+    <label for="email" class="form-label">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Enter email" [(ngModel)]="customer.email" required class="form-input">
+    <i class="fa fa-envelope"></i>
+    <div class="error-message" id="email-error"></div>
+  </div>
 
+  <div class="form-group">
+    <label for="password" class="form-label">Password:</label>
+    <input type="password" id="password" name="password" placeholder="Enter password"  [(ngModel)]="customer.password"required class="form-input">
+    <i class="fa fa-lock"></i>
+    <div class="error-message" id="password-error"></div>
+  </div>
+
+  <div class="form-group">
+    <label for="nid" class="form-label">NID:</label>
+    <input type="text" id="nid" name="nid" placeholder="Enter National ID" [(ngModel)]="customer.nid" required class="form-input">
+  </div>
+
+  <div class="form-group">
+    <label for="phone" class="form-label">Phone:</label>
+    <input type="tel" id="phone" name="phone" placeholder="Enter phone number" [(ngModel)]="customer.phone" required class="form-input">
+  </div>
+
+  <div class="form-group">
+    <label for="address" class="form-label">Address:</label>
+    <input type="text" id="address" name="address" placeholder="Enter address" [(ngModel)]="customer.address" required class="form-input">
+  </div>
+
+  <div class="form-action">
+    <button type="button" class="submit-btn" (click)="RegisterCustomer()" >Register</button>
+    <button type="submit" class="btn btn-success">
+      {{ isUpdate ? 'Update' : 'Submit' }}
+    </button>
+  </div>
+
+  <div>
+    <button href="http://localhost:6010/customer-header" >Login</button>
+  </div>
+</form>
+
+<script>
   document.getElementById('registration-form').addEventListener('submit', function(event) {
     event.preventDefault();
-
     let isValid = true;
     const username = document.getElementById('username');
     const email = document.getElementById('email');
     const password = document.getElementById('password');
 
-    // Username validation
     if (username.value.trim() === '') {
       document.getElementById('username-error').textContent = 'Username is required';
       isValid = false;
@@ -81,7 +63,6 @@
       document.getElementById('username-error').textContent = '';
     }
 
-    // Email validation
     const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
     if (!emailPattern.test(email.value.trim())) {
       document.getElementById('email-error').textContent = 'Please enter a valid email';
@@ -90,7 +71,6 @@
       document.getElementById('email-error').textContent = '';
     }
 
-   
     if (password.value.trim().length < 6) {
       document.getElementById('password-error').textContent = 'Password must be at least 6 characters';
       isValid = false;
@@ -99,12 +79,9 @@
     }
 
     if (isValid) {
-     
       alert('Form submitted successfully!');
-     
     } else {
-     
       alert('Please fix the errors before submitting.');
     }
   });
-</script> -->
+</script>

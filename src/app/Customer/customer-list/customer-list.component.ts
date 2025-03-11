@@ -6,7 +6,9 @@ export interface Customer {
   id: number;
   name: string;
   email: string;
+  nid: number;
   phone: string;
+  address: string;
 }
 
 @Component({
@@ -33,12 +35,14 @@ export class CustomerListComponent implements OnInit {
   }
 
   editCustomer(customer: Customer) {
+     this.router.navigate(['/customer-reg'], { state: { customer } });
     this.router.navigate(['/customerCRUD'], { state: { customer } });
+   
   }
 
   deleteCustomer(customerToDelete: Customer) {
     if (confirm('Are you sure you want to delete this customer?')) {
-      this.customers = this.customers.filter(customer => customer.id !== customerToDelete.id);
+      this.customers = this.customers.filter(customer => customer !== customerToDelete);
       localStorage.setItem('customers', JSON.stringify(this.customers));
       alert('Customer deleted successfully');
     }
