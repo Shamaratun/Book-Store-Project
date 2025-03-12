@@ -6,7 +6,6 @@ import { BookCRUDComponent } from './book/book-crud/book-crud.component';
 import { CustomerRegComponent } from './customer-reg/customer-reg.component';
 import { AdminComponent } from './adminP/adminHeader/admin.component';
 import { RegFormComponent } from './adminP/reg-form/reg-form.component';
-import { CustomerCRUDComponent } from './customerCRUD/customerCRUD.component';
 import { CatagoryCrudListComponent } from './book/catagory-crud-list/catagory-crud-list.component';
 import { DashboardComponent } from './header/dashboard/dashboard.component';
 import { IslamiBooklistComponent } from './book/islami-booklist/islami-booklist.component';
@@ -24,9 +23,8 @@ export const routes: Routes = [
   { path: 'booklist', component: BookListComponent },  // Path for the BookList component
   { path: 'bookCRUD', component: BookCRUDComponent },  // Path for the BookCRUD component
   { path: 'customer-reg', component: CustomerRegComponent },
-  { path: 'customerCRUD', component: CustomerCRUDComponent },
   { path: 'customer-list', component: CustomerListComponent },
-  { path: 'category-crud-list', component: CatagoryCrudListComponent },
+  { path: 'catagory-crud-list', component: CatagoryCrudListComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'islami-booklist', component: IslamiBooklistComponent },
   { path: 'customer-header', component: CustomerHeaderComponent },

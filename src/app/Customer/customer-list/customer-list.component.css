@@ -1,8 +1,7 @@
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f7fc;
-  margin: 0;
-  padding: 0;
+ 
 }
 
 .book-table {
@@ -24,7 +23,7 @@ body {
 }
 
 .book-table th {
-  background-color: #007bff;
+ background-color: cadetblue;
   color: white;
 }
 

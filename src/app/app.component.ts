@@ -9,7 +9,7 @@ import { CardViewComponent } from "./book/card-view/card-view.component";
 //  import { NgModule } from '@angular/core';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FooterComponent, HeaderComponent, FormsModule],
+  imports: [RouterOutlet, FooterComponent, HeaderComponent, FormsModule, CatagoryCrudListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -38,6 +38,25 @@ export class AppComponent {
       this.price = price;
       this.targetAudience = targetAudience;
   
+    }
+  }
+
+  export class Customer {
+    customername: string;
+    email: string;
+    password: string;
+    nid: number;
+    phone: string;
+    address: string;
+
+    constructor(customername: string,  email: string, password: string, nid: number, phone: string, address: string
+    ) {
+      this.customername = customername;
+      this.email = email;
+      this.password = password;
+      this.nid = nid;
+      this.phone = phone;
+      this.address = address;
     }
   }
 

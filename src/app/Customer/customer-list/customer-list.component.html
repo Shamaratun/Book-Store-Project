@@ -1,4 +1,4 @@
-<h3>Customer List</h3>
+<div class="container">
 <table class="table table-striped book-table">
   <thead>
     <tr>
@@ -16,7 +16,7 @@
       @for (customer of customers; track customers) {
         <tr>
       <td>{{ customers.indexOf(customer) + 1}}</td>
-      <td>{{ customer.name }}</td>
+      <td>{{ customer.customername }}</td>
       <td>{{ customer.email }}</td>
       <td>{{customer.nid }}</td>
       <td>{{ customer.phone }}</td>
@@ -41,3 +41,4 @@
   }
   </tbody>
 </table>
+</div>

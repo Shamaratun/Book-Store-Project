@@ -1,15 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Customer } from '../../app.component';
 
-// Define and export the Customer interface (assuming ID is a number and has other properties)
-export interface Customer {
-  id: number;
-  name: string;
-  email: string;
-  nid: number;
-  phone: string;
-  address: string;
-}
 
 @Component({
   selector: 'app-customer-list',
@@ -18,25 +10,24 @@ export interface Customer {
   styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
+ 
   customers: Customer[] = []; // Strongly typed array for customers
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    const customersFromStorage = localStorage.getItem('customers');
-    if (customersFromStorage) {
-      this.customers = JSON.parse(customersFromStorage) as Customer[];
-    }
+    let allCustomers = JSON.parse(localStorage.getItem('customers') || '[]');
+    this.customers =allCustomers;
   }
 
   // Track function for optimizing list rendering
   trackCustomer(index: number, customer: Customer): number {
-    return customer.id;
+    return customer.nid;
   }
 
   editCustomer(customer: Customer) {
      this.router.navigate(['/customer-reg'], { state: { customer } });
-    this.router.navigate(['/customerCRUD'], { state: { customer } });
+    // this.router.navigate(['/customerCRUD'], { state: { customer } });
    
   }
 

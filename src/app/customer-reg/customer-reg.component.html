@@ -1,5 +1,6 @@
-<h1 class="form-title">Register Customer</h1>
-<form id="registration-form" class="customer-form">
+<div class="container">
+  <h1 class="form-title">Register Customer</h1>
+<form id="registration-form" class="customer-form" (ngSubmit)="RegisterCustomer()">
   <div class="form-group">
     <label for="customername" class="form-label">Customer's Name:</label>
     <input type="text" id="customername" name="customername" placeholder="Enter customer's name" [(ngModel)]="customer.customername" required class="form-input">
@@ -37,30 +38,26 @@
   </div>
 
   <div class="form-action">
-    <button type="button" class="submit-btn" (click)="RegisterCustomer()" >Register</button>
-    <button type="submit" class="btn btn-success">
+    <button type="submit" > {{ isUpdate ? 'Update' : 'Register' }}</button>
+    <!-- <button type="submit" class="btn btn-success"(click)="editCustomer(customer.nid)">
       {{ isUpdate ? 'Update' : 'Submit' }}
-    </button>
-  </div>
-
-  <div class="form-footer">
-    <p><a href="http://localhost:4200/customer-header">Login</a></p>
+    </button> -->
   </div>
 </form>
 
 <script>
-  document.getElementById('registration-form').addEventListener('submit', function(event) {
+  document.getElementById('registtion-form').addEventListener('submit', function(event) {
     event.preventDefault();
     let isValid = true;
-    const username = document.getElementById('username');
-    const email = document.getElementById('email');
+    const customername = document.getElementById('usercustomernamename');
+    const email = document.getElraementById('email');
     const password = document.getElementById('password');
 
     if (username.value.trim() === '') {
-      document.getElementById('username-error').textContent = 'Username is required';
+      document.getElementById('customername-error').textContent = 'Username is required';
       isValid = false;
     } else {
-      document.getElementById('username-error').textContent = '';
+      document.getElementById('customername-error').textContent = '';
     }
 
     const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
@@ -85,4 +82,4 @@
     }
   });
 </script>
-<app-customer-header></app-customer-header> 
+</div>

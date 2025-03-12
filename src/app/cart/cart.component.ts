@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 export class CartComponent implements OnInit {
   cartItems: Writer[] = [];
   totalPrice: number = 0;
- quantity: number = 1;
+  quantity: number = 1;
   constructor(private router: Router) {}
 
   private saveCart() {
@@ -51,7 +51,10 @@ export class CartComponent implements OnInit {
   }
 
   calculateTotalPrice() {
-    this.totalPrice = this.cartItems.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
+    this.totalPrice = this.cartItems.reduce(
+      (acc, curr) => acc + curr.price * curr.quantity,
+      0
+    );
   }
 
   ngOnInit(): void {

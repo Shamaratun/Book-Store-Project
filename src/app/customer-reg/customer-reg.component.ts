@@ -2,23 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { CustomerHeaderComponent } from "../Customer/customer-header/customer-header.component";
+import { Customer } from '../app.component';
+
 
 // Define the Customer model
-export class Customer {
-  constructor(
-    public customername: string = '',
-    public email: string = '',
-    public password: string = '',
-    public nid: number = 0,
-    public phone: string = '',
-    public address: string = ''
-  ) {}
-}
+
 
 @Component({
   selector: 'app-customer-reg',
-  imports: [RouterModule, FormsModule, CommonModule, CustomerHeaderComponent],
+  imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './customer-reg.component.html',
   styleUrls: ['./customer-reg.component.css'],
 })
@@ -26,33 +18,45 @@ export class CustomerRegComponent {
   customer: Customer = new Customer('', '', '', 0, '', '');
   customers: Customer[] = [];
   isUpdate: boolean = false;
-  selectedCustomerIndex: number = -1;
+  selectedCustomerIndex: number | null = null;
+
 
   constructor(private router: Router) {
-    this.loadCustomers(); // Load existing customers on component initialization
-  }
-
-  // Load customers from localStorage
-  loadCustomers() {
-    this.customers = JSON.parse(localStorage.getItem('customers') || '[]');
-  }
+     const nav = this.router.getCurrentNavigation();
+     if (nav?.extras?.state?.['customer']) {
+       this.customer = nav.extras.state['customer'];
+       this.isUpdate = true;
+     }
+   }
+ 
+   ngOnInit(): void {
+     this.loadCustomers();
+   }
+ 
+   loadCustomers(): void {
+     const savedCustomers = JSON.parse(localStorage.getItem('customers') || '[]');
+     this.customers = savedCustomers;
+   }
+ 
+   trackCustomers(index: number, customer: Customer): number {
+     return customer.nid;
+   }
 
   // Register a new customer
   RegisterCustomer() {
     if (this.validateCustomer(this.customer)) {
-      let customers: Customer[] = JSON.parse(localStorage.getItem('customers') || '[]');
-
-      if (this.isUpdate && this.selectedCustomerIndex !== -1) {
+      
+      if (this.isUpdate) {
         // Updating an existing customer
-        customers[this.selectedCustomerIndex] = this.customer;
+        this.customers = this.customers.map(cust => cust.nid === this.customer.nid ? this.customer : cust);
         alert('Customer updated successfully!');
       } else {
         // Adding a new customer
-        customers.push(this.customer);
+        this.customers.push(this.customer);
         alert('Customer registered successfully!');
       }
 
-      localStorage.setItem('customers', JSON.stringify(customers));
+      localStorage.setItem('customers', JSON.stringify(this.customers));
       this.loadCustomers(); // Reload the customer list
       this.resetForm(); // Reset form after update or register
       this.router.navigate(['/customer-list']);
@@ -61,12 +65,12 @@ export class CustomerRegComponent {
     }
   }
 
-  // Edit a customer (Load details into the form)
-  editCustomer(index: number) {
-    this.customer = { ...this.customers[index] }; // Clone object to avoid direct mutation
-    this.isUpdate = true;
-    this.selectedCustomerIndex = index;
-  }
+  // // Edit a customer (Load details into the form)
+  // editCustomer(index: number) {
+  //   this.customer = { ...this.customers[index] }; // Clone object to avoid direct mutation
+  //   this.isUpdate = true;
+  //   this.selectedCustomerIndex = index;
+  // }
 
   // Delete a customer
   deleteCustomer(index: number) {
@@ -104,6 +108,6 @@ export class CustomerRegComponent {
   resetForm() {
     this.customer = new Customer('', '', '', 0, '', '');
     this.isUpdate = false;
-    this.selectedCustomerIndex = -1;
+    // this.selectedCustomerIndex = -1;
   }
 }
