@@ -90,13 +90,13 @@ export class CatagoryCrudListComponent implements OnInit {
         alert('Only image files are allowed!');
       }
     }
-  }
+  // }
 
-  // Add category to cart
-  addToCart(catagory: Catagory): void {
-    this.cartItems.push(catagory);
-    localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
-    console.log('Category added to cart:', catagory);
+  // // Add category to cart
+  // addToCart(catagory: Catagory): void {
+  //   this.cartItems.push(catagory);
+  //   localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+  //   console.log('Category added to cart:', catagory);
   }
 
   // Track by function for *ngFor (helps with performance)

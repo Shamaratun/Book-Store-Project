@@ -42,7 +42,7 @@ Empire: Book[] = [];  // Array for storing the list of books
       alert('Book deleted successfully');
     }
   }
-  addToCart(arg0: any) {
-    throw new Error('Method not implemented.');
-    }
+//   addToCart(arg0: any) {
+//     throw new Error('Method not implemented.');
+//     }
 }
