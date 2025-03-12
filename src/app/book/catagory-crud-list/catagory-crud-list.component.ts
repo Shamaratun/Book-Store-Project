@@ -20,10 +20,12 @@ class Book {
   styleUrls: ['./catagory-crud-list.component.css']
 })
 export class CatagoryCrudListComponent implements OnInit {
+  books: Book[] = [];
+  
   book: Book = new Book(0, '', '', 0, null);
   isUpdate = false;
   imageUrl: string | ArrayBuffer | null = null;
-  books: Book[] = [];
+
 
   constructor(private router: Router) {
     const nav = this.router.getCurrentNavigation();
@@ -80,5 +82,28 @@ export class CatagoryCrudListComponent implements OnInit {
         alert('Only image files are allowed!');
       }
     }
+  } editBook(book: Book): void {
+    // Navigate to the book edit page and pass the selected book as state
+    this.router.navigate(['/bookCRUD'], { state: { book } });
+  }
+  
+  // Delete the selected book
+  deleteBook(bookToDelete: Book): void {
+    if (confirm('Are you sure you want to delete this book?')) {
+      // Remove the book from the Empire array by filtering out the book
+      this.books = this.books.filter(book => book !== bookToDelete);
+  
+      // Update localStorage with the new list of books
+      localStorage.setItem('book', JSON.stringify(this.books));
+  
+      alert('Book deleted successfully');
+    }
+  }
+  
+  // Add a book to the shopping cart (placeholder method)
+  addToCart(book: Book): void {
+    // Logic to add the book to a cart
+    console.log('Book added to cart:', book);
+    // You can expand this method to handle cart operations, e.g., saving the cart in localStorage
   }
 }

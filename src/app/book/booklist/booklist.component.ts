@@ -10,7 +10,8 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./booklist.component.css'],
 })
 export class BookListComponent implements OnInit {
-  Empire: Book[] = [];  // Array for storing the list of books
+  
+Empire: Book[] = [];  // Array for storing the list of books
   book: any;
 
   trackEmpire(index: number, book: any): number {
@@ -41,4 +42,7 @@ export class BookListComponent implements OnInit {
       alert('Book deleted successfully');
     }
   }
+  addToCart(arg0: any) {
+    throw new Error('Method not implemented.');
+    }
 }
