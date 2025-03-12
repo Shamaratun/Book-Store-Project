@@ -8,13 +8,15 @@ body {
     margin: 0;
   }
   .container {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-  }
+    max-width: 800px; /* Increased width */
+  width: 90%; /* Makes it responsive */
+  margin: 40px auto;
+  padding: 40px; /* Slightly more padding for better spacing */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+  
   h2 {
     text-align: center;
     color: #333;

@@ -1,78 +1,86 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
-class Book {
-  constructor(
-    public id: number,
-    public categoryName: string,
-    public bookName: string,
-    public price: number,
-    public imageUrl: string | null 
-  ) {}
-}
+import { FormsModule } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule, NgFor } from '@angular/common';
+import { CartComponent } from "../../cart/cart.component";
+import { CartService } from '../../services/cart.service';
+import { Catagory } from '../../app.component';
 
 @Component({
   selector: 'app-catagory-crud-list',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, NgFor, CartComponent],
   templateUrl: './catagory-crud-list.component.html',
   styleUrls: ['./catagory-crud-list.component.css']
 })
 export class CatagoryCrudListComponent implements OnInit {
-  books: Book[] = [];
-  
-  book: Book = new Book(0, '', '', 0, null);
-  isUpdate = false;
-  imageUrl: string | ArrayBuffer | null = null;
+  cartService = inject(CartService);
+  cartItems: Catagory[] = [];
+  catagories: Catagory[] = []; // Array to store category data
+  catagory: Catagory = { id: 0, name: '', description: '',  price: 0, imageUrl: '' }; // Object for form data
+  isUpdate: boolean = false; // Flag to check if it's update mode
+  currentIndex: number | null = null; // To store the index of the category being edited
+  modalOpen: boolean = false; // Flag to control modal visibility
+  imageUrl: string | ArrayBuffer | null = null; // For image preview
 
-
-  constructor(private router: Router) {
-    const nav = this.router.getCurrentNavigation();
-    if (nav?.extras?.state?.['book']) {
-      this.book = nav.extras.state['book'];
-      this.isUpdate = true;
-    }
-  }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-   
-    // Load books from localStorage
-    const savedBooks = localStorage.getItem('book');
-    if (savedBooks) {
-      this.books = JSON.parse(savedBooks);
+    const catagoriesFromStorage = localStorage.getItem('catagories');
+    if (catagoriesFromStorage) {
+      this.catagories = JSON.parse(catagoriesFromStorage) as Catagory[];
     }
+    console.log('Loaded Categories:', this.catagories);
+
+    let allCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+    this.cartItems = allCartItems;
   }
 
-  onSubmit() {
-    let catagories: Book[] = JSON.parse(localStorage.getItem('book') || '[]');
-
-    if (this.isUpdate) {
-      catagories = catagories.map((b) => (b.id === this.book.id ? this.book : b));
+  onSubmit(): void {
+    if (this.isUpdate && this.currentIndex !== null) {
+      this.catagories[this.currentIndex] = { ...this.catagory }; // Replace the category at the given index
     } else {
-      // Ensure that the ID is unique by checking the existing books
-      this.book.id = catagories.length ? Math.max(...catagories.map(b => b.id)) + 1 : 1;
-      catagories.push(this.book);
+      this.catagory.id = this.catagories.length ? Math.max(...this.catagories.map(c => c.id)) + 1 : 1;
+      this.catagories.push(this.catagory); // Add a new category
     }
 
-    // Store the updated list in localStorage
-    localStorage.setItem('book', JSON.stringify(catagories));
+    localStorage.setItem('catagories', JSON.stringify(this.catagories)); // Save updated list to localStorage
+    console.log('Updated Categories:', this.catagories);
+    this.resetForm(); // Reset form
+    this.closeModal(); // Close modal after submitting
+  }
 
-    // Reset form data
-    this.book = new Book(0, '', '', 0, null);
+  // Reset the form after submission
+  resetForm(): void {
+    this.catagory = { id: 0, name: '', description: '',price: 0, imageUrl: '' };
+    this.isUpdate = false; // Reset update flag
+    this.currentIndex = null; // Reset index
+  }
 
-    // Reload books from localStorage
-    this.books = catagories;
+  // Edit a category
+  editCatagory(catagory: Catagory, index: number): void {
+    this.catagory = { ...catagory }; // Copy the category's data into the form
+    this.currentIndex = index; // Store the index for updating
+    this.isUpdate = true; // Set the flag to indicate update mode
+    this.openModal(); // Open modal for editing
+  }
+
+  // Delete a category
+  deleteCatagory(catagoryToDelete: Catagory): void {
+    if (confirm('Are you sure you want to delete this category?')) {
+      this.catagories = this.catagories.filter(catagory => catagory !== catagoryToDelete);
+      localStorage.setItem('catagories', JSON.stringify(this.catagories));
+      alert('Category deleted successfully');
+      console.log('Updated Categories after deletion:', this.catagories);
+    }
   }
 
   // Handle image file selection
   onImageChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
-      // Check if file is an image type
       const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
       if (allowedTypes.includes(file.type)) {
-        this.book.imageUrl = file;
+        this.catagory.imageUrl = file.name; // Store only file name
         const reader = new FileReader();
         reader.onload = () => {
           this.imageUrl = reader.result;
@@ -82,28 +90,27 @@ export class CatagoryCrudListComponent implements OnInit {
         alert('Only image files are allowed!');
       }
     }
-  } editBook(book: Book): void {
-    // Navigate to the book edit page and pass the selected book as state
-    this.router.navigate(['/bookCRUD'], { state: { book } });
   }
-  
-  // Delete the selected book
-  deleteBook(bookToDelete: Book): void {
-    if (confirm('Are you sure you want to delete this book?')) {
-      // Remove the book from the Empire array by filtering out the book
-      this.books = this.books.filter(book => book !== bookToDelete);
-  
-      // Update localStorage with the new list of books
-      localStorage.setItem('book', JSON.stringify(this.books));
-  
-      alert('Book deleted successfully');
-    }
+
+  // Add category to cart
+  addToCart(catagory: Catagory): void {
+    this.cartItems.push(catagory);
+    localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+    console.log('Category added to cart:', catagory);
   }
-  
-  // Add a book to the shopping cart (placeholder method)
-  addToCart(book: Book): void {
-    // Logic to add the book to a cart
-    console.log('Book added to cart:', book);
-    // You can expand this method to handle cart operations, e.g., saving the cart in localStorage
+
+  // Track by function for *ngFor (helps with performance)
+  trackCatagory(index: number, catagory: Catagory): number {
+    return catagory.id;
+  }
+
+  // Open the modal
+  openModal(): void {
+    this.modalOpen = true;
+  }
+
+  // Close the modal
+  closeModal(): void {
+    this.modalOpen = false;
   }
 }
