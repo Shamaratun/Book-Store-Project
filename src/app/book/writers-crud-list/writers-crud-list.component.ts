@@ -4,20 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { CartComponent } from "../../cart/cart.component";
+import { Writer } from '../../app.component';
 
 
-export interface Writer {
-  id: number;
-  writerName: string;
-  bookName: string;
-  quantity: number;
-  price: number;
-  imageUrl: string;
-}
+
 
 @Component({
   selector: 'app-writers-crud-list',
-  imports: [FormsModule, CommonModule, NgFor, CartComponent],
+  imports: [FormsModule, CommonModule, NgFor, CartComponent,],
   templateUrl: './writers-crud-list.component.html',
   styleUrls: ['./writers-crud-list.component.css']
 })
