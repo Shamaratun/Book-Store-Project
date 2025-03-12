@@ -36,6 +36,7 @@ export const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 's-list', component: SListComponent },
   { path: 'cart', component: CartComponent },
+  
 ];
 
 

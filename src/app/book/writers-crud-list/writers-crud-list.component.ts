@@ -1,10 +1,11 @@
 
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { CartComponent } from "../../cart/cart.component";
 import { Writer } from '../../app.component';
+import { CartService } from '../../services/cart.service';
 
 
 
@@ -16,12 +17,15 @@ import { Writer } from '../../app.component';
   styleUrls: ['./writers-crud-list.component.css']
 })
 export class WritersCrudListComponent implements OnInit {
+  cartServeice = inject(CartService); 
+  carts: Writer[] = [];
+
   writers: Writer[] = []; // Array to store books data
   writer: Writer = {id:0, writerName: '', bookName: '',quantity:0, price: 0, imageUrl: '' }; // Object for form data
   isUpdate: boolean = false; // Flag to check if it’s update mode
   currentIndex: number | null = null; // To store the index of the writer being edited
   modalOpen: boolean = false; // Flag to control modal visibility
-  carts: Writer[] = [];
+  
 
   constructor(private router: Router) { }
 
@@ -107,3 +111,5 @@ export class WritersCrudListComponent implements OnInit {
     this.modalOpen = false; // Hide modal
   }
 }
+export { Writer };
+

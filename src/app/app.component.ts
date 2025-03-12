@@ -74,7 +74,6 @@ export class AppComponent {
     this.writerName = writerName;
     this.bookName = bookName;
     this.quantity = quantity;
-    
     this.price = price;
     this.imageUrl = imageUrl;
   }
